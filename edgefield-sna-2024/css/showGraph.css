@@ -1,0 +1,88 @@
+#graphArea {
+    width: 100%;
+    height: 600px;
+    display: block;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    margin: .5rem 0 1rem 0;
+  }
+  .zipFile,
+  .graphFile {
+    font-size: 0.75rem;
+    text-overflow: ellipsis;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 1px;
+    padding: 1px;
+    cursor: pointer;
+  }
+  .zipFIle {
+    pointer-events: none;
+  }
+  .graphFileSelected {
+    background-color: green;
+  }
+  .graphFile:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .self-pad-5 {
+    padding: 5px !important;
+  }
+  #toast-container {
+    top: auto !important;
+    right: auto !important;
+    bottom: 5%;
+    left:37.5%;
+  }
+  .btn {
+    background-color: green;
+    height: 24px;
+    width: 100%;
+    padding: 5px 16px !important;
+    margin: 0.5em 0;
+    font-size: 0.8rem !important;
+    position: relative;
+    bottom: 7px;
+    left: 2px;
+  }
+  .toggleOff {
+    background-color: orangered;
+  }
+  .btn > span {
+    font-size: 0.8rem !important;
+    position: relative;
+    bottom: 7px;
+    left: 2px;
+    user-select: none;
+  }
+  .btn > .material-icons {
+    line-height: 22px !important;
+  }
+  .graphListArea {
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  
+/*
+Custom CSS
+*/
+nav {
+  background-color: #0069d9 !important;
+  padding: 0 1em;
+}
+nav .brand-logo {
+  font-size: 1.5em !important;
+}
+.container {
+  width: 95% !important;
+  height: 95%;
+  padding: 2em 0;
+}
+#test4, #test5 {
+  padding: 1em;
+}
+.downloadZip {
+  padding: 0px 16px !important;
+}

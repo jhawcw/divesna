@@ -1,0 +1,140 @@
+/* Styles go here */
+
+body {
+    font: 14px sans-serif;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+
+  /* hide y axis */
+
+  .axis .tick line,
+  .axis path {
+    display: none;
+  }
+
+  .category-circle {
+    fill: #F4A636;
+  }
+
+  .question-circle {
+    fill: url(#gradient-questions);
+  }
+
+  .chart-area-circle {
+    stroke: #fff;
+    stroke-width: 3px;
+    fill: url(#gradient-chart-area);
+  }
+
+  .center-circle {
+    fill: #fff;
+  }
+
+  .bars {
+    fill: url(#gradient-bars);
+  }
+
+  .gridlines {
+    fill: none;
+    stroke: #fff;
+  }
+
+  .minor {
+    stroke-width: 1px
+  }
+
+  .major {
+    stroke-width: 6px
+  }
+
+  .question-label-arc {
+    /*fill: white;
+      stroke: #AAAAAA;
+      fill: url(#gradient-questions);*/
+  }
+
+  .category-label-text {
+    font-weight: bold;
+    font-size: 21px;
+    fill: #fff;
+  }
+
+  .question-label-text {
+    font-size: 14px;
+    font-weight: bold;
+    fill: gray;
+  }
+
+  .question-labels {
+    text-anchor: middle;
+    font-weight: bold;
+  }
+
+  .category-labels {
+    text-anchor: middle;
+    font-weight: bold;
+    font-size: 21px;
+    fill: #fff;
+  }
+
+  .commMsgFill {
+    fill: #688fca;
+  }
+  .commOrgFill {
+    fill: #729bdd;
+  }
+  .commSuitFill {
+    fill: #82a2d4;
+  }
+  .colRespectFill {
+    fill: #89d4e8;
+  }
+  .colSharedFill {
+    fill: #52d4ff;
+  }
+  .globalCulturalFill {
+    fill: #dae36e;
+  }
+  .globalPerspectiveFill {
+    fill: #cfdd47;
+  }
+  .critAnalysisFill {
+    fill: #ec2d89;
+  }
+  .critEvaluationFill {
+    fill: #de468d;
+  }
+  .critSynthesisFill {
+    fill: #ca1c6e;
+  }
+  .inventCuriosityFill {
+    fill: #E84B0B;
+  }
+  .inventCreativityFill {
+    fill: #ff2601;
+  }
+  .inventAdaptabilityFill {
+    fill: #E80B0B;
+  }
+  .commCatFill {
+    fill: #4180ff;
+  }
+  .colCatFill {
+    fill: #7ad7ff;
+  }
+  .globalCatFill {
+    fill: #73fa79;
+  }
+  .critCatFill {
+    fill: #ff2f92;
+  }
+  .inventCatFill {
+    fill: #ff2601;
+  }

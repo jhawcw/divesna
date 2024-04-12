@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Social Network Analysis">
+    <meta name="author" content="Dive Analytics Pte. Ltd.">
+
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png"> -->
+    <title>Social Network Analysis Portal</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/steps.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/colors/blue.css" id="theme">
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="css/toastr.min.css">
+
+    <title>Social Network Analysis</title>
+</head>
+
+<body class="fix-header fix-sidebar card-no-border logo-center">
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+
+    <div id="main-wrapper">
+
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <b>
+                            <span class="text-white">Social Network Analysis</span>
+                        </b>
+                    </a>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
+                                href="javascript:void(0)"><i class="mdi mdi-menu"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="page-wrapper">
+            
+            <div class="container">
+            
+                <div class="row page-titles p-0 mb-3">
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">Social Network Analysis</h3>
+                    </div>
+                    <div class="col-md-7 align-self-center">
+                        <button type="button" id="print-pdf-btn" class="btn btn-info btn-rounded float-right d-none"><i
+                                class="mdi mdi-download"></i> Download Report</button>
+                    </div>
+                </div>
+            
+                <div id="wizard-row" class="row">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-body wizard-content">
+                                <h4 class="card-title">Upload Data</h4>
+                                <form action="#" class="tab-wizard wizard-circle" enctype="multipart/form-data">
+                                    <!-- Step 1 -->
+                                    <h6>Upload Student Data</h6>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-8 offset-md-2">
+                                                <div class="custom-file my-5">
+                                                    <input type="file" class="custom-file-input" id="upExcelData">
+                                                    <label class="custom-file-label form-control" for="upExcelData">Choose file...</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!-- Step 2 -->
+                                    <h6>Upload Student Names Map</h6>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-8 offset-md-2">
+                                                <div class="custom-file my-5">
+                                                    <input type="file" class="custom-file-input" id="upExcelNameMap">
+                                                    <label class="custom-file-label form-control" for="upExcelNameMap">Choose file...</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!-- Step 3 -->
+                                    <h6>Upload Survey Responses</h6>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-8 offset-md-2">
+                                                <div class="custom-file my-5">
+                                                    <input type="file" class="custom-file-input" id="upExcel">
+                                                    <label class="custom-file-label form-control" for="upExcel">Choose file...</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <!-- Step 4 -->
+                                    <h6>Upload SBB Class List</h6>
+                                    <section>
+                                        <div class="row">
+                                            <div class="col-md-8 offset-md-2">
+                                                <div class="custom-file my-5">
+                                                    <input type="file" class="custom-file-input" id="upExcelClassList">
+                                                    <label class="custom-file-label form-control" for="upExcelClassList">Choose file...</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div id="output-row" class="row mb-5 d-none">
+            
+                    <div class="col-lg-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h4 class="card-title">Toggle Chart</h4>
+                                <div class="row d-none" id="graphListArea"></div>
+                                <button type="button" class="btn btn-outline-primary btn-rounded btn-block nameToggle"><i
+                                        class="mdi mdi-cursor-pointer"></i> Toggle Names</button>
+                                <button type="button" class="btn btn-outline-info btn-rounded btn-block conductToggle"><i
+                                        class="mdi mdi-cursor-pointer"></i> Toggle Conduct</button>
+                                <button type="button" class="btn btn-outline-success btn-rounded btn-block gradeToggle"><i
+                                        class="mdi mdi-cursor-pointer"></i> Toggle Grade</button>
+                                <button type="button" class="btn btn-outline-warning btn-rounded btn-block genderToggle"><i
+                                        class="mdi mdi-cursor-pointer"></i> Toggle Gender</button>
+                                <button type="button" class="btn btn-outline-danger btn-rounded btn-block streamToggle"><i
+                                        class="mdi mdi-cursor-pointer"></i> Toggle Stream</button>
+                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-block psleToggle"><i
+                                        class="mdi mdi-cursor-pointer"></i> Toggle PSLE</button>
+                                <hr class="my-4">
+                                <h4 class="card-title">Reset Graph</h4>
+                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-block resetNodes"><i
+                                        class="mdi mdi-undo"></i> Reset Nodes</button>
+                                <hr class="my-4">
+                                <h4 class="card-title">Generate Images</h4>
+                                <button type="button" class="btn btn-outline-info btn-rounded btn-block saveImage"><i
+                                        class="mdi mdi-image"></i> Save Image</button>
+                                <button type="button" class="btn btn-outline-primary btn-rounded btn-block automate"><i
+                                        class="mdi mdi-image"></i> Generate All</button>
+                                <!-- <button type="button" class="btn btn-primary btn-block automateSingle"><i class="mdi mdi-briefcase-check"></i> Automate Class</button> -->
+                                <hr class="my-4">
+                                <h4 class="card-title">Download File</h4>
+                                <!-- <div id="imageFileLayer"></div> -->
+                                <button type="button" class="btn btn-outline-secondary btn-rounded downloadZip btn-block"><i
+                                        class="mdi mdi-cloud-download"></i> Download Zip</button>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-9">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h4 class="card-title">Network Chart</h4>
+                                <div id="graphArea" style="height: 700px;"></div>
+                            </div>
+                        </div>
+                    </div>
+            
+            
+                    <!-- Absentees Table -->
+                    <div class="col-lg-12">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h4 class="card-title">Absentees</h4>
+                                <div id="absenceList"></div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Top 5 Most Popular Students
+                    <div class="col-lg-6">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h4 class="card-title">Top 5 Most Popular Students</h4>
+                                <h6 class="card-subtitle">By Degree Centrality</h6>
+                                <small><a href="" data-toggle="modal" data-target="#degree-centrality-modal"><i
+                                            class="mdi mdi-information" style="font-size: 1rem;"></i> What is Degree
+                                        Centrality?</a></small>
+                                <div class="table-responsive">
+                                    <table id="popularity-table" class="table table-hover"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    Top 5 Most Influential Students
+                    <div class="col-lg-6">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h4 class="card-title">Top 5 Most Influential Students</h4>
+                                <h6 class="card-subtitle">By Betweeness Centrality</h6>
+                                <small><a href="" data-toggle="modal" data-target="#betweeness-centrality-modal"><i
+                                            class="mdi mdi-information" style="font-size: 1rem;"></i> What is Betweeness
+                                        Centrality?</a></small>
+                                <div class="table-responsive">
+                                    <table id="influence-table" class="table table-hover"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+            
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <span id="class-size" class="display-6 text-success"></span>
+                                        <h6 class="text-success">Class Size</h6>
+                                    </div>
+                                    <div class="col-4 align-self-center text-right p-l-0">
+                                        <h1 class="text-success"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <span id="exp-students" class="display-6 text-info">38</span>
+                                        <h6 class="text-info">EXP Students</h6>
+                                    </div>
+                                    <div class="col-4 align-self-center text-right p-l-0">
+                                        <h1 class="text-info"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <span id="na-students" class="display-6 text-primary">38</span>
+                                        <h6 class="text-primary">NA Students</h6>
+                                    </div>
+                                    <div class="col-4 align-self-center text-right p-l-0">
+                                        <h1 class="text-primary"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <span id="nt-students" class="display-6 text-megna"></span>
+                                        <h6 class="text-megna">NT Students</h6>
+                                    </div>
+                                    <div class="col-4 align-self-center text-right p-l-0">
+                                        <h1 class="text-megna"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span id="total-ties" class="display-6 text-info"></span>
+                                        <h6 class="text-info">Total No. of Ties</h6>
+                                    </div>
+                                    <div class="col-3 align-self-center text-right p-l-0">
+                                        <h1 class="text-info"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span id="total-mutual-ties" class="display-6 text-primary"></span>
+                                        <h6 class="text-primary">Total No. of Mutual Ties</h6>
+                                    </div>
+                                    <div class="col-3 align-self-center text-right p-l-0">
+                                        <h1 class="text-primary"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span id="percentage-mutual-ties" class="display-6 text-megna"></span>
+                                        <h6 class="text-megna">Percentage of Mutual Ties</h6>
+                                    </div>
+                                    <div class="col-3 align-self-center text-right p-l-0">
+                                        <h1 class="text-megna"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span id="exp-students-mix-stream" class="display-6 text-info"></span>
+                                        <h6 class="text-info">EXP Students with <br />Mix-Stream Ties</h6>
+                                    </div>
+                                    <div class="col-3 align-self-center text-right p-l-0">
+                                        <h1 class="text-info"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span id="na-students-mix-stream" class="display-6 text-primary"></span>
+                                        <h6 class="text-primary">NA Students with <br />Mix-Stream Ties</h6>
+                                    </div>
+                                    <div class="col-3 align-self-center text-right p-l-0">
+                                        <h1 class="text-primary"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span id="nt-students-mix-stream" class="display-6 text-megna"></span>
+                                        <h6 class="text-megna">NT Students with <br />Mix-Stream Ties</h6>
+                                    </div>
+                                    <div class="col-3 align-self-center text-right p-l-0">
+                                        <h1 class="text-megna"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span id="exp-students-influence" class="display-6 text-info"></span>
+                                        <h6 class="text-info">No. of EXP Students <br />(Circle of Influence)</h6>
+                                    </div>
+                                    <div class="col-3 align-self-center text-right p-l-0">
+                                        <h1 class="text-info"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span id="na-students-influence" class="display-6 text-primary"></span>
+                                        <h6 class="text-primary">No. of NA Students <br />(Circle of Influence)</h6>
+                                    </div>
+                                    <div class="col-3 align-self-center text-right p-l-0">
+                                        <h1 class="text-primary"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span id="nt-students-influence" class="display-6 text-megna"></span>
+                                        <h6 class="text-megna">No. of NT Students <br />(Circle of Influence)</h6>
+                                    </div>
+                                    <div class="col-3 align-self-center text-right p-l-0">
+                                        <h1 class="text-megna"><i class="fa fa-users"></i></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-12">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h4 class="card-title">Summary of Student Ties</h4>
+                                <h6 class="card-subtitle">Note: Students who are highlighted are those who are classified as Circle
+                                    of Influence</h6>
+                                <div class="table-responsive">
+                                    <table id="summary-table" class="table table-striped table-hover w-100">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th colspan="4"></th>
+                                                <th colspan="3">In-Degree Ties</th>
+                                            </tr>
+                                            <tr class="text-center">
+                                                <th>Student</th>
+                                                <th>Stream</th>
+                                                <th>Total Ties</th>
+                                                <th>Mutual Ties</th>
+                                                <th>EXP Ties</th>
+                                                <th>NA Ties</th>
+                                                <th>NT Ties</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="summary-table-body"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+            
+            <div id="degree-centrality-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="vcenter">What is Degree Centrality?</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <ul>
+                                <li>Degree centrality tells us the number of immediate friendship ties each student has in the
+                                    class.</li>
+                                <li>It is best used for finding very connected nodes (i.e. popular students) who are likely to hold
+                                    most information
+                                    or can quickly connect with the rest of the network (i.e. class).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="betweeness-centrality-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="vcenter">What is Betweeness Centrality?</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <ul>
+                                <li>Betweeness centrality considers the position where each node (i.e. student) is placed within the
+                                    network.</li>
+                                <li>Students with high betweeness centrality controls the flow of information, and can greatly
+                                    influence the class by
+                                    choosing to withhold or distort information he/she receives.</li>
+                                <li>Captures the most important students in the network (i.e. the leaders or the most influential
+                                    students).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="mybutton">DO SOMETHING</button>
+
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.slimscroll.js"></script>
+    <script src="js/waves.js"></script>
+    <script src="js/sidebarmenu.js"></script>
+    <script src="js/sticky-kit.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="plugins/sheetjs/xlsx.full.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="plugins/jszip/jszip.min.js"></script>
+    <script src="plugins/jszip/FileSaver.js"></script>
+    <script src="plugins/cytoscape/cytoscape.min.js"></script>
+    <script src="plugins/cytoscape/weaver.min.js"></script>
+    <script src="plugins/cytoscape/cytoscape-cose-bilkent.js"></script>
+    <script src="plugins/cytoscape/cytoscape-spread.js"></script>
+    <script src="plugins/cytoscape/cola.min.js"></script>
+    <script src="plugins/cytoscape/cytoscape-cola.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/jquery.steps.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/toastr.min.js"></script>
+    <script src="js/jspdf.min.js"></script>
+    <script src="js/sheetjs-helpers.js"></script>
+    <script src="js/advanced.js"></script>
+    <script src="test.js"></script>
+
+</body>
+</html>
