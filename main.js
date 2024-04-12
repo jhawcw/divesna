@@ -37,6 +37,12 @@ const devices = [
     uuid: "f0960000-0000-1000-8000-d49390141869",
     serial: "NKNP50PNJ00000002F00113",
   },
+  {
+    school:"jason windows desktop",
+    name:"jason haw chin wei",
+    uuid:"24310f60-3fe0-7e49-5854-e03f497e544c",
+    serial:"System Serial Number",
+  }
 ];
 
 const windowDimension = {
